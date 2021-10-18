@@ -222,7 +222,8 @@ class SQLiteDBMgmt(object):
 			try:
 				cursor.execute(query_stmt)
 				if completion_msg != "":
-					print(completion_msg)
+					if verbose:
+						print(completion_msg)
 			except Exception as e:
 				if verbose:
 					err = str(e).split(": ")
@@ -288,7 +289,10 @@ class SQLiteDBMgmt(object):
 			if not (col_definitions == None):
 				columns = list(col_definitions.keys())
 				number_of_columns = len(columns)
-				print(columns)
+
+				if verbose:
+					print(columns)
+				
 				for col in columns:
 					curr_col_definition = col_definitions[col]
 					curr_col_type = curr_col_definition["type"]

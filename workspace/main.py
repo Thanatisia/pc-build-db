@@ -104,6 +104,9 @@ import modules.dblib as dblib
 import modules.security as sec
 from pathlib import Path
 
+# GUI Frameworks
+import tkinter as tk
+
 """ General Functions """
 
 
@@ -245,6 +248,8 @@ class Workspace(object):
 		# 	if self.security.token:
 		# 		# Success
 		# 		self.home_page()
+		root = tk.Tk()
+		root.mainloop()
 		
 
 	def home_page(self):
@@ -347,7 +352,6 @@ def startup():
 	init()
 
 def main():
-	print("Hello World")
 	ws.main()
 
 
