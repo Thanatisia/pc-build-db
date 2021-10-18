@@ -105,7 +105,7 @@ import modules.security as sec
 from pathlib import Path
 
 # GUI Frameworks
-import tkinter as tk
+import modules.guilib as gui
 
 """ General Functions """
 
@@ -152,38 +152,52 @@ class Workspace(object):
 			{
 				"name" : "profiles",
 				"columns" : {
-					"ROW_ID" : {
-						"type" : "INTEGER",
-						"key" : "PRIMARY KEY",
-						"null" : False,
-						"default" : None,
-						"unique" : True,
-						"others" : ""
-					},
-					"username" : {
-						"type" : "VARCHAR(255)",
-						"key" : "NIL",
-						"null" : False,
-						"default" : None,
-						"unique" : True,
-						"others" : ""
-					},
-					"password" : {
-						"type" : "VARCHAR(255)",
-						"key" : "NIL",
-						"null" : False,
-						"default" : None,
-						"unique" : True,
-						"others" : ""
-					},
-					"email" : {
-						"type" : "VARCHAR(255)",
-						"key" : "NIL",
-						"null" : False,
-						"default" : None,
-						"unique" : True,
-						"others" : ""
-					}
+					"ROW_ID" 	: {"type" : "INTEGER",		"key" : "PRIMARY KEY",	"null" : False,	"default" : None,	"unique" : True,	"others" : ""},
+					"username" 	: {"type" : "VARCHAR(255)",	"key" : "NIL",			"null" : False,	"default" : None,	"unique" : True,	"others" : ""},
+					"password" 	: {"type" : "VARCHAR(255)",	"key" : "NIL",			"null" : False,	"default" : None,	"unique" : True,	"others" : ""},
+					"email" 	: {"type" : "VARCHAR(255)",	"key" : "NIL",			"null" : False,	"default" : None,	"unique" : True,	"others" : ""}
+				}
+			},
+			{
+				"name" : "designs",
+				"columns" : {
+					"ROW_ID" 						: {"type" : "INTEGER",	"key" : "PRIMARY KEY",	"null" : False,	"default" : None,		"unique" : True,	"others" : ""},
+					"case_name" 					: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"case_manufacturer" 			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"case_price" 					: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.0,		"unique" : False,	"others" : ""},
+					"motherboard_name" 				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"motherboard_manufacturer" 		: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"motherboard_price" 			: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"cpu_name" 						: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"cpu_manufacturer" 				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"cpu_price" 					: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"gpu_name" 						: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"gpu_manufacturer" 				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"gpu_price" 					: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"psu_name" 						: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"psu_manufacturer" 				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"psu_power_output"				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : "\"0W\"",	"unique" : False,	"others" : ""},
+					"psu_price" 					: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"cooling_device_name" 			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"cooling_device_manufacturer" 	: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"cooling_device_price" 			: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"io_devices_name" 				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"io_devices_manufacturer" 		: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"io_devices_price" 				: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"memory_device_name" 			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"memory_device_manufacturer" 	: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"memory_device_size"			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"memory_device_price" 			: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"storage_device_name" 			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"storage_device_manufacturer" 	: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"storage_device_size"			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"storage_device_price" 			: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"peripheral_category"			: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"peripheral_name"				: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"peripheral_manufacturer" 		: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"peripheral_price" 				: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
+					"operating_system_name" 		: {"type" : "TEXT",		"key" : "NIL",			"null" : True,	"default" : None,		"unique" : False,	"others" : ""},
+					"operating_system_price" 		: {"type" : "FLOAT",	"key" : "NIL",			"null" : True,	"default" : 0.00,		"unique" : False,	"others" : ""},
 				}
 			}
 		]
@@ -342,12 +356,15 @@ def init():
 	- Variables
 	- Classes
 	"""
-	global csdb_mgt, csdb_utils, csdb_queries, ws, test
+	global csdb_mgt, csdb_utils, csdb_queries, tk, gui_TK, gui_Qt, ws, test
 
 	# External Class Objects
 	csdb_mgt = dblib.SQLiteDBMgmt("PCPartsList.db")
 	csdb_utils = csdb_mgt.BaseUtilities()
 	csdb_queries = csdb_mgt.Queries()
+	tk = gui.tk
+	gui_TK = gui.TKinterUtils()
+	gui_Qt = gui.Qt5Utils()
 
 	# Internal Class Objects
 	ws = Workspace()

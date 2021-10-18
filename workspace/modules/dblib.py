@@ -224,13 +224,16 @@ class SQLiteDBMgmt(object):
 				if completion_msg != "":
 					if verbose:
 						print(completion_msg)
-			except Exception as e:
+			except db.IntegrityError as ie:
 				if verbose:
-					err = str(e).split(": ")
+					err = str(ie).split(": ")
 					err_msg = err[0]
 					err_obj = err[1].split('.')[1]
 					if err_msg == "UNIQUE constraint failed":
-						print("{} exists.".format(err_obj))
+						print("{} exists.".format(err_obj))			
+			except Exception as e:
+				if verbose:
+					print("Exception:\n\t{}".format(e))
 
 			# Commit changes in the database (i.e. like in Git/Github)
 			if commit:
@@ -323,9 +326,13 @@ class SQLiteDBMgmt(object):
 					
 					if curr_col_default == None:
 						curr_col_default = ""
+					else:
+						curr_col_default = "DEFAULT {}".format(curr_col_default)
 
 					if curr_col_unique == True:
 						curr_col_unique = "UNIQUE"
+					else:
+						curr_col_unique = ""
 
 
 					## Compilation
