@@ -293,7 +293,15 @@ class Workspace(object):
 			# 1. Get Password Hash, 
 			# 2. Ask user to input password and 
 			# 3. Compare
-			if sec.encrypt_sha256(input("Password: ")) == csdb_utils.retrieve(csdb_mgt.conn, ws.table_properties[0]["name"], "username,password",  "username=\"{}\"".format(self.uname), fetch="one", completion_msg="")[1]:
+			if sec.encrypt_sha256(input("Password: ")) == \
+				csdb_utils.retrieve(
+					csdb_mgt.conn, 
+					ws.table_properties[0]["name"], 
+					"username,password",  
+					"username=\"{}\"".format(self.uname), 
+					fetch="one", 
+					completion_msg=""
+				)[1]:
 				print("Login Successful")
 				self.token = True
 			else:
